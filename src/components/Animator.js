@@ -19,6 +19,7 @@ const Animator = forwardRef((props, ref) => {
 		onDOMLoaded,
 		onDestroy,
 		style,
+		className,
 	} = props;
 	const animationContainer = useRef(null);
 	const animationInstanceRef = useRef(null);
@@ -65,7 +66,7 @@ const Animator = forwardRef((props, ref) => {
 	 * TODO: complete
 	 * @param speed
 	 */
-	const setSpeed = speed => {
+	const setSpeed = (speed) => {
 		if (animationInstanceRef.current) {
 			animationInstanceRef.current.setSpeed(speed);
 		}
@@ -100,7 +101,7 @@ const Animator = forwardRef((props, ref) => {
 	 * TODO: complete
 	 * @param direction
 	 */
-	const setDirection = direction => {
+	const setDirection = (direction) => {
 		if (animationInstanceRef.current) {
 			animationInstanceRef.current.setDirection(direction);
 		}
@@ -123,7 +124,7 @@ const Animator = forwardRef((props, ref) => {
 	 * TODO: complete
 	 * @param useSubFrames
 	 */
-	const setSubframe = useSubFrames => {
+	const setSubframe = (useSubFrames) => {
 		if (animationInstanceRef.current) {
 			animationInstanceRef.current.setSubframe(useSubFrames);
 		}
@@ -144,7 +145,7 @@ const Animator = forwardRef((props, ref) => {
 	 * TODO: complete
 	 * @param inFrames
 	 */
-	const getDuration = inFrames => {
+	const getDuration = (inFrames) => {
 		if (animationInstanceRef.current) {
 			return animationInstanceRef.current.getDuration(inFrames);
 		}
@@ -259,13 +260,13 @@ const Animator = forwardRef((props, ref) => {
 			{ name: "destroy", handler: onDestroy },
 		];
 
-		const deregisterList = listeners.map(event =>
+		const deregisterList = listeners.map((event) =>
 			addEventListenerHelper(event.name, event.handler),
 		);
 
 		// Deregister events on unmount
 		return () => {
-			deregisterList.forEach(deregister => deregister());
+			deregisterList.forEach((deregister) => deregister());
 		};
 	}, [
 		onComplete,
@@ -296,7 +297,7 @@ const Animator = forwardRef((props, ref) => {
 	// 	// }
 	// }, [loop]);
 
-	return <div ref={animationContainer} style={style} />;
+	return <div ref={animationContainer} style={style} className={className} />;
 });
 
 Animator.propTypes = {
